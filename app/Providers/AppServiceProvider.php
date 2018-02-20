@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace OverSurgery\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

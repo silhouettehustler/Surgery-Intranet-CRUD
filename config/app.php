@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => "Over Surgery",
 
     /*
     |--------------------------------------------------------------------------
@@ -154,11 +154,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        OverSurgery\Providers\AppServiceProvider::class,
+        OverSurgery\Providers\AuthServiceProvider::class,
+        // OverSurgery\Providers\BroadcastServiceProvider::class,
+        OverSurgery\Providers\EventServiceProvider::class,
+        OverSurgery\Providers\RouteServiceProvider::class,
 
     ],
 
