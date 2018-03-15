@@ -11,9 +11,14 @@
 |
 */
 
+
 Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/appointment', 'AppointmentController@index')->name('appointment');
+Route::get('/appointment/edit/{id}', 'AppointmentController@edit')->name('appointment-edit');
+Route::get('/appointment/create', 'AppointmentController@create')->name('appointment-create');
+Route::post('/appointment/destroy/{id}', 'AppointmentController@destroy')->name("appointment-destroy");
