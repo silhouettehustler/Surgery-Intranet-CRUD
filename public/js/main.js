@@ -4,13 +4,36 @@ $(document).ready(function(){
 
 var Main = {
     Init: function(){
-    Main.InitPlugins();
+    Main.Plugins.InitAll();
     Main.InitModalForm();
     },
-    InitPlugins: function() {
-
-        //Init date pickers
-        $(".datepicker").datepicker();
+    Plugins:{
+        InitAll: function(){
+            Main.Plugins.InitDatePicker();
+            Main.Plugins.InitDataTable();
+        },
+        InitDatePicker: function(){
+            //Init date pickers
+            $(".datepicker").datepicker();
+        },
+        InitDataTable: function(){
+            //Init data table
+            $(".sortable-table").DataTable( {
+                responsive: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'copyHtml5',
+                    'excelHtml5',
+                    'csvHtml5',
+                    'pdfHtml5',
+                    'print'
+                ],
+                "columnDefs": [ {
+                    "targets": 'no-sort',
+                    "orderable": false,
+                } ]
+            } );
+        }
     },
     InitModalForm: function(){
 
@@ -27,13 +50,25 @@ var Main = {
                 type:"GET"
             }).done(function(response){
                 $container.find(".modal-body").html(response);
-                Main.InitPlugins();
+                $container.find(".modal-title").text($ele.data("title"));
+                Main.Plugins.InitDatePicker();
             }).fail(function(error){
                 console.log(error.statusMessage);
             });
 
         });
 
+    },
+    Helpers:{
+        DeleteRow: function(ele,message){
+
+            var $ele = $(ele);
+
+            $().toastmessage('showSuccessToast', message);
+
+            var table = $ele.closest("table").DataTable();
+            table.row($ele.closest("tr")).remove().draw();
+        }
     },
     Appointments : {
         Destroy: function(ele){
@@ -48,13 +83,10 @@ var Main = {
                 data:{
                     $id:$ele.data("id")
                 }
-            }).done(function(response){
-                console.log(response);
-                $ele.closest("tr").fadeOut("slow",function(){
-                    $(this).remove();
-                });
+            }).done(function(){
+                Main.Helpers.DeleteRow($ele,"Successfully cancelled appointment!")
             }).fail(function(error){
-                console.log(error.statusMessage)
+                $().toastmessage('showErrorToast', error.statusMessage);
             });
         }
     }
