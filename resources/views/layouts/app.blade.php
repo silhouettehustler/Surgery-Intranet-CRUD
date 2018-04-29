@@ -66,12 +66,15 @@
                             <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
                         @else
 
-                            <li><a class="nav-link" href="#" role="button" onclick="SignalR.Chat.Start()">
-                                    <i class="fa fa-comment"></i> Help
-                                </a>
-                            </li>
+                            @if (\Illuminate\Support\Facades\Auth::user()->hasRole('patient'))
+                                <li><a class="nav-link" href="#" role="button" onclick="SignalR.Chat.Start(open)">
+                                        <i class="fa fa-comment"></i> Help
+                                    </a>
+                                </li>
+                            @endif
+
                             <li class="nav-item dropdown">
-                                <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link" href="#" id="user-name" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                    <i class="fa fa-user"></i> {{ Auth::user()->name }} <span class="fa fa-chevron-circle-down"></span>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -123,6 +126,15 @@
     <script src="{{ asset('js/jquery.toastmessage.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
 
+@auth
+    @if (\Illuminate\Support\Facades\Auth::user()->hasRole('receptionist'))
+        <script type="text/javascript">
+            SignalR.Chat.Start();
+        </script>
+    @endif
+@endauth
+
+
 </body>
 
 <div class="modal" tabindex="-1" role="dialog" id="modal-container">
@@ -152,8 +164,7 @@
                         <h3 class="panel-title"><i class="fa fa-comment"></i> Chat</h3>
                     </div>
                     <div class="col-md-4 col-xs-4" style="text-align: right;float: right;">
-                        <a href="#"><i id="minim_chat_window" class="fa fa-minus icon_minim"></i></a>
-                        <a href="#"><i class="fa fa-times-circle icon_close" data-id="chat_window_1"></i></a>
+                        <button style="color: white;background: none;border: none;cursor: pointer;" onclick="SignalR.Chat.LeaveChat()"><i class="fa fa-times-circle icon_close"></i></button>
                     </div>
                 </div>
                 <div class="panel-body msg_container_base" id="chat-window"></div>
@@ -161,7 +172,7 @@
                     <div class="input-group">
                         <input id="message" type="text" class="form-control input-sm chat_input" placeholder="Write your message here..." />
                         <span class="input-group-btn">
-                        <button class="btn btn-outline-primary btn-sm" id="sendmessage">Send</button>
+                        <button class="btn btn-outline-primary btn-sm" style="display:none" id="sendmessage">Send</button>
                         </span>
                     </div>
                 </div>

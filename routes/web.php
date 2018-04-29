@@ -17,6 +17,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home/getUser/{id}','HomeController@getUser')->name('get-user');
 Route::get('/home/getUserChatDetails', 'HomeController@getUserChatDetails')->name('home-user-chat-details');
 
 Route::get('/appointment', 'AppointmentController@index')->name('appointment');

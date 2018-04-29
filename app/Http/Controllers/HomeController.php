@@ -3,6 +3,7 @@
 namespace OverSurgery\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use OverSurgery\User;
 
 class HomeController extends Controller
 {
@@ -20,5 +21,10 @@ class HomeController extends Controller
     {
         $IsReceptionist = Auth::user()->hasRole('receptionist');
         return [Auth::user()->id,$IsReceptionist ? "rec"  : ""];
+    }
+
+    public function getUser($id)
+    {
+        return User::query()->find($id)->name;
     }
 }
