@@ -113,6 +113,9 @@
     <script src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/solid.js" integrity="sha384-+Ga2s7YBbhOD6nie0DzrZpJes+b2K1xkpKxTFFcx59QmVPaSA8c7pycsNaFwUK6l" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/fontawesome.js" integrity="sha384-7ox8Q2yzO/uWircfojVuCQOZl+ZZBg2D2J5nkpLqzH1HY0C1dHlTKIbpRz/LG23c" crossorigin="anonymous"></script>
+    <script src="{{asset('js/signalr.js')}}"></script>
+    <script src="http://localhost:8080/signalr/hubs"></script>
+    <script src="{{asset('js/chat.js')}}"></script>
     <script src="{{ asset('js/jquery.toastmessage.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
 
@@ -135,5 +138,22 @@
         </div>
     </div>
 </div>
+
+<div class="form-group col-xl-12">
+    <label class="control-label">Your connection Id</label><br />
+    <input type="text" class="col-lg-12 text-primary" id="frndConnId" placeholder="Paste your friend's connection Id" /><br /><br />
+    <label class="control-label">Your Message</label><br />
+    <textarea type="text" class="col-lg-10 text-primary" id="message"></textarea>
+
+    <input type="button" class="btn btn-primary" id="sendmessage" value="Send" /><br /><br />
+    <img src="~/Content/smile.jpg" width="20" height="20" id="smile" style="cursor:pointer"/>
+    <img src="~/Content/uff.jpg" width="20" height="20" id="ufff" style="cursor:pointer" />
+    <div class="container chatArea">
+        <input type="hidden" id="displayname" />
+        <ul id="discussion"></ul>
+    </div>
+</div>
+<br />
+<input type="hidden" id="groupid" />
 
 </html>

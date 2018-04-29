@@ -4,7 +4,7 @@ namespace OverSurgery;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Result extends Model
+class Shift extends Model
 {
     //
 }

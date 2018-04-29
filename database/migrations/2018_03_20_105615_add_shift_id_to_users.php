@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateResultsTable extends Migration
+class AddShiftIdToUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateResultsTable extends Migration
      */
     public function up()
     {
-        Schema::create('results', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+        Schema::table('users', function($table) {
+            $table->integer('shift_id')->unsigned()->nullable();
+            $table->foreign("shift_id")->references('id')->on('shifts');
         });
     }
 
@@ -26,6 +26,6 @@ class CreateResultsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('results');
+
     }
 }
