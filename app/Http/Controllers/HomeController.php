@@ -2,6 +2,8 @@
 
 namespace OverSurgery\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
+
 class HomeController extends Controller
 {
   /**
@@ -12,5 +14,11 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+
+    public function getUserChatDetails()
+    {
+        $IsReceptionist = Auth::user()->hasRole('receptionist');
+        return [Auth::user()->id,$IsReceptionist ? "rec"  : ""];
     }
 }

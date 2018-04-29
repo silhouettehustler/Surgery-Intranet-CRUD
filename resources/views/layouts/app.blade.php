@@ -65,6 +65,11 @@
                             <li><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                             <li><a class="nav-link" href="{{ route('register') }}">Register</a></li>
                         @else
+
+                            <li><a class="nav-link" href="#" role="button" onclick="SignalR.Chat.Start()">
+                                    <i class="fa fa-comment"></i> Help
+                                </a>
+                            </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                    <i class="fa fa-user"></i> {{ Auth::user()->name }} <span class="fa fa-chevron-circle-down"></span>
@@ -73,7 +78,6 @@
                                     <a class="dropdown-item" href="#">My Appointments</a>
                                     <a class="dropdown-item" href="#">My Medications</a>
                                     <a class="dropdown-item" href="#">My Results</a>
-                                    <a class="dropdown-item" href="#">Chat</a>
                                     <a title="Logout" class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -139,21 +143,35 @@
     </div>
 </div>
 
-<div class="form-group col-xl-12">
-    <label class="control-label">Your connection Id</label><br />
-    <input type="text" class="col-lg-12 text-primary" id="frndConnId" placeholder="Paste your friend's connection Id" /><br /><br />
-    <label class="control-label">Your Message</label><br />
-    <textarea type="text" class="col-lg-10 text-primary" id="message"></textarea>
-
-    <input type="button" class="btn btn-primary" id="sendmessage" value="Send" /><br /><br />
-    <img src="~/Content/smile.jpg" width="20" height="20" id="smile" style="cursor:pointer"/>
-    <img src="~/Content/uff.jpg" width="20" height="20" id="ufff" style="cursor:pointer" />
-    <div class="container chatArea">
-        <input type="hidden" id="displayname" />
-        <ul id="discussion"></ul>
+<div class="container" id="chat-window-container">
+    <div class="row chat-window col-xs-5 col-md-3" id="chat_window_1" style="margin-left:10px;">
+        <div class="col-xs-12 col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading top-bar">
+                    <div class="col-md-8 col-xs-8" style="float: left;">
+                        <h3 class="panel-title"><i class="fa fa-comment"></i> Chat</h3>
+                    </div>
+                    <div class="col-md-4 col-xs-4" style="text-align: right;float: right;">
+                        <a href="#"><i id="minim_chat_window" class="fa fa-minus icon_minim"></i></a>
+                        <a href="#"><i class="fa fa-times-circle icon_close" data-id="chat_window_1"></i></a>
+                    </div>
+                </div>
+                <div class="panel-body msg_container_base" id="chat-window"></div>
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <input id="message" type="text" class="form-control input-sm chat_input" placeholder="Write your message here..." />
+                        <span class="input-group-btn">
+                        <button class="btn btn-outline-primary btn-sm" id="sendmessage">Send</button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <input type="hidden" id="groupid">
+    <input type="hidden" id="displayname">
+    <input type="hidden" id="chat-user-deets" data-url="{{ route('home-user-chat-details') }}">
 </div>
-<br />
-<input type="hidden" id="groupid" />
 
 </html>
