@@ -1,5 +1,6 @@
 ﻿using System.Collections.Concurrent;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNet.SignalR;
 
 namespace Chat
@@ -12,9 +13,14 @@ namespace Chat
         private static readonly ConcurrentDictionary<string, int>
             UsersWaiting = new ConcurrentDictionary<string, int>();
 
-        public void Send(string message,string name,string groupid)
+        public override Task OnConnected()
         {
-            GlobalHost.ConnectionManager.GetHubContext<ChatHub>().Clients.Group(groupid).addNewMessageToPage(message,name);
+            return base.OnConnected();
+        }
+
+        public override Task OnDisconnected(bool stopCalled)
+        {
+            return base.OnDisconnected(stopCalled);
         }
 
         public void JoinChat(int userId, string tag = null)
@@ -56,6 +62,11 @@ namespace Chat
                     UsersWaiting.TryAdd(Context.ConnectionId, userId);
                 }
             }
+        }
+
+        public void Send(string message, string name, string groupid)
+        {
+            GlobalHost.ConnectionManager.GetHubContext<ChatHub>().Clients.Group(groupid, Context.ConnectionId).addNewMessageToPage(message, name);
         }
 
         private enum ChatStatus
