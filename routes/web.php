@@ -22,6 +22,9 @@ Route::get('/home/getUserChatDetails', 'HomeController@getUserChatDetails')->nam
 
 Route::get('/results','ResultsController@index')->name("results");
 
+Route::get('/prescriptions','PrescriptionController@index')->name("prescriptions");
+Route::post('/prescriptions/extend/{id}', 'PrescriptionController@extend')->name('prescription-extend');
+
 Route::get('/appointment/getAvailableStaff/{day}','AppointmentController@getAvailableStaff')->name('get-available-staff');
 Route::get('/appointment', 'AppointmentController@index')->name('appointment');
 Route::get('/appointment/edit/{id}', 'AppointmentController@edit')->name('appointment-edit');

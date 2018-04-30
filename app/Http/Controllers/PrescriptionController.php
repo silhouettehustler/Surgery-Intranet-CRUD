@@ -4,9 +4,9 @@ namespace OverSurgery\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use OverSurgery\Result;
+use OverSurgery\Prescription;
 
-class ResultsController extends Controller
+class PrescriptionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class ResultsController extends Controller
      */
     public function index()
     {
-        $results = Result::all()->where("user_id","=",Auth::user()->id);
-        return view('results')->with("results",$results);
+        $prescriptions = Prescription::all()->where("user_id","=",Auth::user()->id);
+        return view('prescriptions')->with("prescriptions",$prescriptions);
     }
 
     /**
@@ -60,6 +60,16 @@ class ResultsController extends Controller
     public function edit($id)
     {
         //
+    }
+
+    public function extend($id)
+    {
+        $prescription = Prescription::query()->find($id);
+        $prescription->extended_date = date_add(new \DateTime($prescription->expiry_date),date_interval_create_from_date_string("30 days"));
+        $prescription->is_extended = true;
+        $prescription->save();
+
+        return 200;
     }
 
     /**

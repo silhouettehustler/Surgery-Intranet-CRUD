@@ -166,5 +166,25 @@ var Main = {
             });
         }
 
+    },
+    Prescriptions:{
+        Extend: function(ele){
+
+            var $ele = $(ele);
+
+            $.ajax({
+                url:$ele.data("url"),
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type:"post"
+            }).done(function(){
+                $().toastmessage('showSuccessToast', "Successfully extended prescription!");
+                location.reload();
+            }).fail(function(error){
+                $().toastmessage('showErrorToast', error.statusMessage);
+            });
+
+        }
     }
 }

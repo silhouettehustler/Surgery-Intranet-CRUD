@@ -20,7 +20,7 @@
                                     <button onclick="location.href='appointment'" class="btn btn-outline-primary">Manage Appointments</button>
                                 @else
                                     <ul style="list-style-type: none; margin-right: 20px;">
-                                        <li><button class="btn btn-outline-dark home-panel-list">My Prescriptions</button></li>
+                                        <li><button onclick="location.href='prescriptions'" class="btn btn-outline-dark home-panel-list">My Prescriptions</button></li>
                                         <li><button onclick="location.href='appointment'" class="btn btn-outline-primary home-panel-list">My Appointments</button></li>
                                         <li><button class="btn btn-outline-warning home-panel-list">Staff Planner</button></li>
                                         <li><button onclick="location.href='results'" class="btn btn-outline-danger home-panel-list">My Results</button></li>
