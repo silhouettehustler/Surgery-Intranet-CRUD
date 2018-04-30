@@ -186,5 +186,31 @@ var Main = {
             });
 
         }
+    },
+    Staff:{
+        DateFilter: function(ele){
+
+            var date = $(ele).val();
+
+            $.ajax({
+                url: "availableStaffChange/"+date,
+                type:"GET"
+            }).done(function(response){
+                var $table = $("#staff-planer-table");
+
+                $table.DataTable().destroy();
+                $table.fadeOut("slow",function(){
+                    $table.find("tbody").html(response);
+
+                })
+
+                $table.fadeIn("slow",function(){
+                    Main.Plugins.InitDataTable();
+                });
+
+            }).fail(function(error){
+                $().toastmessage('showErrorToast', error.statusMessage);
+            });
+        }
     }
 }

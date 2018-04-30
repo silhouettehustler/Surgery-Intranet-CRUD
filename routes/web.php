@@ -19,6 +19,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/getUser/{id}','HomeController@getUser')->name('get-user');
 Route::get('/home/getUserChatDetails', 'HomeController@getUserChatDetails')->name('home-user-chat-details');
+Route::get('availableStaff','HomeController@availableStaff')->name('get-available-staff');
+Route::get('availableStaffChange/{day}','HomeController@availableStaffChange')->name('get-available-staff-change');
 
 Route::get('/results','ResultsController@index')->name("results");
 
@@ -32,3 +34,4 @@ Route::get('/appointment/create', 'AppointmentController@create')->name('appoint
 Route::get('/appointment/timeSlots/{id}/{date}','AppointmentController@timeSlots')->name('appointment-get-time-slot');
 Route::post('/appointment/destroy/{id}', 'AppointmentController@destroy')->name("appointment-destroy");
 Route::post('/appointment/store','AppointmentController@store')->name("appointment-store");
+

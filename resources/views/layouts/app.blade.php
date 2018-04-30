@@ -78,9 +78,10 @@
                                    <i class="fa fa-user"></i> {{ Auth::user()->name }} <span class="fa fa-chevron-circle-down"></span>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#">My Appointments</a>
-                                    <a class="dropdown-item" href="#">My Medications</a>
-                                    <a class="dropdown-item" href="#">My Results</a>
+                                    <a class="dropdown-item" href="appointment">My Appointments</a>
+                                    <a class="dropdown-item" href="prescriptions">My Prescriptions</a>
+                                    <a class="dropdown-item" href="availableStaff">Staff Planner</a>
+                                    <a class="dropdown-item" href="results">My Results</a>
                                     <a title="Logout" class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

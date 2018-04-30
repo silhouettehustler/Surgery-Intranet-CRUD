@@ -86,7 +86,7 @@ html,body {
 .dropdown-menu {
     position: absolute;
     top: 100%;
-    left: 30%;
+    left: 101%;
     z-index: 1000;
     display: none;
     float: left;
