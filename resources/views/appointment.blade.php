@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card card-default">
                     <div class="card-header">Appointments</div>
 
@@ -18,7 +18,9 @@
                                 <tr>
                                     <th>GP</th>
                                     <th>Description</th>
-                                    <th>Date/Time</th>
+                                    <th>Date</th>
+                                    <th>Start Time</th>
+                                    <th>End Time</th>
                                     <th class="no-sort"></th>
                                 </tr>
                                 </thead>
@@ -27,7 +29,9 @@
                                     <tr>
                                         <td>{{\OverSurgery\User::all()->find($appointment -> employee_id)->name}}</td>
                                         <td>{{$appointment->description}}</td>
-                                        <td>{{$appointment->datetime}}</td>
+                                        <td>{{$appointment->date}}</td>
+                                        <td>{{$appointment->start_time}}</td>
+                                        <td>{{$appointment->end_time}}</td>
                                         <td>
                                             <button class="btn btn-sm btn-outline-primary modal-container-trigger" data-url="{{ route('appointment-edit',$appointment->id) }}" data-title="Edit Appointment">Edit <i class="fa fa-cog"></i></button>
                                             <button class="btn btn-sm btn-outline-danger" onclick="Main.Appointments.Destroy(this)" data-url="{{ route('appointment-destroy',$appointment->id) }}">Delete <i class="fa fa-ban"></i></button>

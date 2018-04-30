@@ -148,7 +148,7 @@
             </div>
             <div class="modal-body"></div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-outline-success">Save</button>
+                <button type="button" class="btn btn-outline-success" id="modal-save-btn">Save</button>
                 <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
             </div>
         </div>

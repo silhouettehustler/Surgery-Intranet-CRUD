@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="col-md-12 col-sm-1" style="text-align: center;">
                             <div class="btn-group">
-                                @if (\Illuminate\Support\Facades\Auth::user()->hasRole('receptionist'))
+                                @if (\Illuminate\Support\Facades\Auth::user()->hasRole('receptionist') || \Illuminate\Support\Facades\Auth::user()->hasRole('gp'))
                                     <button onclick="location.href='appointment'" class="btn btn-outline-primary">Manage Appointments</button>
                                 @else
                                     <ul style="list-style-type: none; margin-right: 20px;">

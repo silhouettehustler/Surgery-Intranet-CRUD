@@ -6,6 +6,28 @@ var Main = {
     Init: function(){
     Main.Plugins.InitAll();
     Main.InitModalForm();
+
+    $(document).on("click","#modal-save-btn",function(){
+        var $form = $(".modal-body").find("form");
+        var form = $form[0];
+        var formData = new FormData(form);
+
+        $.ajax({
+            url: $form.data("url"),
+            data: formData,
+            type: "POST",
+            processData: false,
+            contentType: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+        }).done(function () {
+            $().toastmessage('showSuccessToast', "Changes saved!");
+            $('#modal-container').modal('hide');
+        }).fail(function (error) {
+            $().toastmessage('showErrorToast', error.statusMessage);
+        });
+    })
     },
     Plugins:{
         InitAll: function(){
@@ -14,7 +36,7 @@ var Main = {
         },
         InitDatePicker: function(){
             //Init date pickers
-            $(".datepicker").datepicker();
+            $(".datepicker").datepicker({dateFormat: 'dd-mm-yy'});
         },
         InitDataTable: function(){
             //Init data table
@@ -82,14 +104,14 @@ var Main = {
         GetTimeSlot: function(ele){
             var $ele = $(ele);
             var $form = $ele.closest("form");
-            var $id = $form.find("#gp_id");
-            var $timeSlots = $("#time_slot");
-
+            var $id = $form.find("#employee_id");
+            var $timeSlots = $("#start_time");
+            var date = $('#date').val();
 
             if ($id === undefined){$().toastmessage('showInfoToast', "Please select GP, to see the available time slots");}
 
             $.ajax({
-                url: "/appointment/timeSlots?id=$"+$id.val(),
+                url: "/appointment/timeSlots/"+$id.val()+"/"+date,
                 type:"GET"
             }).done(function(response){
                 $timeSlots.html(response);
@@ -98,15 +120,29 @@ var Main = {
             });
 
         },
+        GetAvailableDoctors: function(ele){
+
+            var $ele = $(ele);
+            $.ajax({
+                url: "/appointment/getAvailableStaff/"+$ele.val(),
+                type:"GET"
+            }).done(function(response){
+                $('#employee_id').html(response);
+            }).fail(function(error){
+                $().toastmessage('showErrorToast', error.statusMessage);
+            });
+
+        },
         AppointmentBookingEventsInit: function(){
 
             //appointment datetime change
-            $(document).on("change","#appointment-form #datetime",function(){
-                Main.Appointments.GetTimeSlot($(this));
+            $(document).on("change","#appointment-form #date",function(){
+                $('#time_slot').html("");
+                Main.Appointments.GetAvailableDoctors($(this));
             });
 
             //appointment gp id change
-            $(document).on("change","#appointment-form #gp_id",function(){
+            $(document).on("change","#appointment-form #employee_id",function(){
                 Main.Appointments.GetTimeSlot($(this));
             });
         },

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAppointmentsTable extends Migration
+class CreateUserShiftDaysTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateAppointmentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('appointments', function (Blueprint $table) {
+        Schema::create('user_shift_days', function (Blueprint $table) {
             $table->increments('id');
-            $table->string("description");
-            $table->dateTime("datetime");
-            $table->integer('user_id')->unsigned();
+            $table->integer('shift_day_id')->unsigned();;
+            $table->foreign("shift_day_id")->references('id')->on('shift_days');
+            $table->integer('user_id')->unsigned();;
             $table->foreign("user_id")->references('id')->on('users');
-            $table->integer('employee_id')->unsigned();
-            $table->foreign("employee_id")->references('id')->on('users');
-            $table->boolean("cancelled")->default(0);
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ class CreateAppointmentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('appointments');
+        Schema::dropIfExists('user_shift_days');
     }
 }
