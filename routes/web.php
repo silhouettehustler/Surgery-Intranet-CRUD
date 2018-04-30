@@ -20,6 +20,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home/getUser/{id}','HomeController@getUser')->name('get-user');
 Route::get('/home/getUserChatDetails', 'HomeController@getUserChatDetails')->name('home-user-chat-details');
 
+Route::get('/results','ResultsController@index')->name("results");
+
 Route::get('/appointment/getAvailableStaff/{day}','AppointmentController@getAvailableStaff')->name('get-available-staff');
 Route::get('/appointment', 'AppointmentController@index')->name('appointment');
 Route::get('/appointment/edit/{id}', 'AppointmentController@edit')->name('appointment-edit');

@@ -24,6 +24,7 @@ var Main = {
         }).done(function () {
             $().toastmessage('showSuccessToast', "Changes saved!");
             $('#modal-container').modal('hide');
+            location.reload();
         }).fail(function (error) {
             $().toastmessage('showErrorToast', error.statusMessage);
         });
