@@ -79,15 +79,16 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="appointment">My Appointments</a>
-                                    <a class="dropdown-item" href="prescriptions">My Prescriptions</a>
                                     <a class="dropdown-item" href="availableStaff">Staff Planner</a>
-                                    <a class="dropdown-item" href="results">My Results</a>
-                                    <a title="Logout" class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
+                                    @if (\Illuminate\Support\Facades\Auth::user()->hasRole('patient'))
+                                        <a class="dropdown-item" href="prescriptions">My Prescriptions</a>
+                                        <a class="dropdown-item" href="results">My Results</a>
+                                    @endif
+                                        <a title="Logout" class="dropdown-item" href="{{ route('logout') }}"
+                                           onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        <i class="fa fa-sign-out-alt"></i>
-                                    </a>
-
+                                            <i class="fa fa-sign-out-alt"></i>
+                                        </a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>

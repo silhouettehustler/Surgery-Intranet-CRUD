@@ -17,7 +17,10 @@
                         <div class="col-md-12 col-sm-1" style="text-align: center;">
                             <div class="btn-group">
                                 @if (\Illuminate\Support\Facades\Auth::user()->hasRole('receptionist') || \Illuminate\Support\Facades\Auth::user()->hasRole('gp'))
-                                    <button onclick="location.href='appointment'" class="btn btn-outline-primary">Manage Appointments</button>
+                                    <ul style="list-style-type: none; margin-right: 20px;">
+                                        <li><button onclick="location.href='appointment'" class="btn btn-outline-primary">Manage Appointments</button></li>
+                                        <li><button onclick="location.href='availableStaff'" class="btn btn-outline-warning home-panel-list">Staff Planner</button></li>
+                                    </ul>
                                 @else
                                     <ul style="list-style-type: none; margin-right: 20px;">
                                         <li><button onclick="location.href='prescriptions'" class="btn btn-outline-dark home-panel-list">My Prescriptions</button></li>
